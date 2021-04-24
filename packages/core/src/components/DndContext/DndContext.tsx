@@ -255,7 +255,11 @@ export const DndContext = memo(function DndContext({
 
   const overId =
     active && collisionRect
-      ? collisionDetection(Array.from(droppableRects.entries()), collisionRect)
+      ? collisionDetection(
+          Array.from(droppableRects.entries()),
+          collisionRect,
+          pointerCoordinates
+        )
       : null;
   const overContainer = getOver(overId, droppableContainers);
   const over = useMemo(

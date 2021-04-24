@@ -90,5 +90,6 @@ export {
   closestCenter,
   closestCorners,
   rectIntersection,
+  pointerIntersection,
 } from './utilities';
 export type {CollisionDetection} from './utilities';

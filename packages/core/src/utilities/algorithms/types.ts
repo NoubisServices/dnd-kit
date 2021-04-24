@@ -1,6 +1,12 @@
-import type {RectEntry, ViewRect, UniqueIdentifier} from '../../types';
+import type {
+  RectEntry,
+  ViewRect,
+  UniqueIdentifier,
+  Coordinates,
+} from '../../types';
 
 export type CollisionDetection = (
   entries: RectEntry[],
-  target: ViewRect
+  target: ViewRect,
+  coordinates?: Coordinates | null
 ) => UniqueIdentifier | null;
