@@ -37,6 +37,9 @@ export function useLayoutMeasuring(
   const recomputeLayouts = useCallback(() => setWillRecomputeLayouts(true), []);
   const recomputeLayoutsTimeoutId = useRef<NodeJS.Timeout | null>(null);
   const disabled = isDisabled();
+
+  let el = document.getElementById('editorScrollContainer');
+
   const layoutRectMap = useLazyMemo<LayoutRectMap>(
     (previousValue) => {
       if (disabled && !dragging) {
@@ -53,12 +56,15 @@ export function useLayoutMeasuring(
           if (!container) {
             continue;
           }
-
+          // console.log('before');
           container.rect.current = container.node.current
             ? getElementLayout(container.node.current)
             : null;
+          container.rect.current!.offsetTop -= el?.scrollTop!;
+          // console.log('getting element layout');
+          // console.log('afterbefore');
+          // console.log(container);
         }
-
         return createLayoutRectMap(containers);
       }
 

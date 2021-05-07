@@ -335,6 +335,7 @@ export const DndContext = memo(function DndContext({
             type: Action.DragMove,
             coordinates,
           });
+          // recomputeLayouts();
         },
         onEnd: createHandler(Action.DragEnd),
         onCancel: createHandler(Action.DragCancel),
@@ -454,6 +455,7 @@ export const DndContext = memo(function DndContext({
         y: scrollAdjustedTransalte.y,
       },
       over,
+      pointerCoordinates,
     };
 
     setMonitorState({type: Action.DragMove, event});
