@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useRef} from 'react';
 import {CSS} from '@dnd-kit/utilities';
 
-import {getRelativeTransformOrigin} from '../../utilities';
+import {getEventCoordinates, getRelativeTransformOrigin} from '../../utilities';
 import {applyModifiers, Modifiers} from '../../modifiers';
 import {ActiveDraggableContext} from '../DndContext';
 import {useDndContext} from '../../hooks';
@@ -86,13 +86,18 @@ export const DragOverlay = React.memo(
           scaleX: 1,
           scaleY: 1,
         };
+    const pointerPosition =
+      activatorEvent &&
+      getEventCoordinates(
+        activatorEvent as MouseEvent | KeyboardEvent | TouchEvent
+      );
     const style: React.CSSProperties | undefined = activeNodeRect
       ? {
           position: 'fixed',
           width: activeNodeRect.width,
           height: activeNodeRect.height,
-          top: activeNodeRect.top,
-          left: activeNodeRect.left,
+          top: pointerPosition!.y - 25 || undefined,
+          left: pointerPosition!.x - 50 || undefined,
           zIndex,
           transform: CSS.Transform.toString(finalTransform),
           touchAction: 'none',
